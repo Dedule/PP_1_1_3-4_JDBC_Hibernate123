@@ -14,6 +14,13 @@ public class Main {
     public static void main(String[] args) {
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
+        userService.saveUser("Vasa", "Pupkin", (byte) 18);
+        userService.saveUser("Petr", "Ivanov", (byte) 22);
+        userService.saveUser("John", "Smith", (byte) 32);
+        List<User> userList = userService.getAllUsers();
+        userList.forEach(System.out::println);
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
 
     }
 }
