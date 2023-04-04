@@ -9,7 +9,11 @@ public class Util {
     private static final String LOG = "root";
     private static final String PASS = "0000";
 
-    public static Connection getConnection() throws SQLException {
-       return DriverManager.getConnection(URL,LOG,PASS);
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL,LOG,PASS);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
