@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -26,6 +27,9 @@ public class UserDaoHibernateImpl implements UserDao {
                     "  PRIMARY KEY (`id`),\n" +
                     "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)").executeUpdate();
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -36,6 +40,9 @@ public class UserDaoHibernateImpl implements UserDao {
             s.beginTransaction();
             s.createSQLQuery("drop table if exists user").executeUpdate();
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -46,6 +53,9 @@ public class UserDaoHibernateImpl implements UserDao {
             s.beginTransaction();
             s.save(new User(name, lastName, age));
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -56,6 +66,9 @@ public class UserDaoHibernateImpl implements UserDao {
             s.beginTransaction();
             s.delete(s.get(User.class, id));
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -67,6 +80,9 @@ public class UserDaoHibernateImpl implements UserDao {
             s.beginTransaction();
             userList = s.createQuery("FROM User").getResultList();
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
         return userList;
     }
@@ -78,6 +94,9 @@ public class UserDaoHibernateImpl implements UserDao {
             s.beginTransaction();
             s.createQuery("delete from User").executeUpdate();
             s.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+
         }
     }
 }

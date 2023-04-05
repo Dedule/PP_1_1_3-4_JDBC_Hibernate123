@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private static final UserDao daoJDBC = new UserDaoJDBCImpl();
     private static final UserDao daoHibernate = new UserDaoHibernateImpl();
 
     public void createUsersTable() {
